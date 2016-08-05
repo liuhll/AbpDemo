@@ -4,14 +4,16 @@ using Abp.Localization.Dictionaries.Xml;
 using Abp.Modules;
 using Abp.Zero;
 using Abp.Zero.Configuration;
+using Castle.MicroKernel.Registration;
 using Liuhl.AbpDemo.Authorization;
 using Liuhl.AbpDemo.Authorization.Roles;
+using Liuhl.AbpDemo.Entity;
 using Liuhl.AbpDemo.MultiTenancy;
 using Liuhl.AbpDemo.Users;
 
 namespace Liuhl.AbpDemo
 {
-    [DependsOn(typeof(AbpZeroCoreModule))]
+    [DependsOn(typeof(AbpZeroCoreModule), typeof(AbpDemoEntityModule))]
     public class AbpDemoCoreModule : AbpModule
     {
         public override void PreInitialize()

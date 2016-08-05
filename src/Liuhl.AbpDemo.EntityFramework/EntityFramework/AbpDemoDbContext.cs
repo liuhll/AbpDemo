@@ -1,6 +1,9 @@
 ﻿using System.Data.Common;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using Abp.Zero.EntityFramework;
 using Liuhl.AbpDemo.Authorization.Roles;
+using Liuhl.AbpDemo.Mapping;
 using Liuhl.AbpDemo.MultiTenancy;
 using Liuhl.AbpDemo.Users;
 
@@ -36,6 +39,15 @@ namespace Liuhl.AbpDemo.EntityFramework
             : base(connection, true)
         {
 
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            base.OnModelCreating(modelBuilder);
+
+            DataMigrationConfiguration.ConfigurationTablesMapping(modelBuilder);
         }
     }
 }
